@@ -88,6 +88,7 @@ static t_config_enum_values s_keys_map_PrintHostType {
     { "obico",          htObico },
     { "flashforge",     htFlashforge },
     { "simplyprint",    htSimplyPrint },
+    { "elegoolink",     htElegooLink }
 };
 CONFIG_OPTION_ENUM_DEFINE_STATIC_MAPS(PrintHostType)
 
@@ -327,6 +328,7 @@ static const t_config_enum_values s_keys_map_BrimType = {
     {"outer_and_inner", btOuterAndInner},
     {"auto_brim", btAutoBrim},  // BBS
     {"brim_ears", btEar},     // Orca
+    {"painted", btPainted},  // BBS
 };
 CONFIG_OPTION_ENUM_DEFINE_STATIC_MAPS(BrimType)
 
@@ -1257,12 +1259,14 @@ void PrintConfigDef::init_fff_params()
     def->enum_keys_map = &ConfigOptionEnum<BrimType>::get_enum_values();
     def->enum_values.emplace_back("auto_brim");
     def->enum_values.emplace_back("brim_ears");
+    def->enum_values.emplace_back("painted");
     def->enum_values.emplace_back("outer_only");
     def->enum_values.emplace_back("inner_only");
     def->enum_values.emplace_back("outer_and_inner");
     def->enum_values.emplace_back("no_brim");
     def->enum_labels.emplace_back(L("Auto"));
     def->enum_labels.emplace_back(L("Mouse ear"));
+    def->enum_labels.emplace_back(L("Painted"));
     def->enum_labels.emplace_back(L("Outer brim only"));
     def->enum_labels.emplace_back(L("Inner brim only"));
     def->enum_labels.emplace_back(L("Outer and inner brim"));
@@ -3615,6 +3619,7 @@ void PrintConfigDef::init_fff_params()
     def->enum_values.push_back("obico");
     def->enum_values.push_back("flashforge");
     def->enum_values.push_back("simplyprint");
+    def->enum_values.push_back("elegoolink");
     def->enum_labels.push_back("PrusaLink");
     def->enum_labels.push_back("PrusaConnect");
     def->enum_labels.push_back("Octo/Klipper");
@@ -3628,6 +3633,7 @@ void PrintConfigDef::init_fff_params()
     def->enum_labels.push_back("Obico");
     def->enum_labels.push_back("Flashforge");
     def->enum_labels.push_back("SimplyPrint");
+    def->enum_labels.push_back("Elegoo Link");
     def->mode = comAdvanced;
     def->cli = ConfigOptionDef::nocli;
     def->set_default_value(new ConfigOptionEnum<PrintHostType>(htOctoPrint));
